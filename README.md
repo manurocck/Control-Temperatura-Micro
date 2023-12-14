@@ -3,6 +3,9 @@
 </p>
 
 # 🔥 Simulación de un Sistema de Control de T° de un Microprocesador
+<p align="center">
+<img src="https://github.com/manurocck/Control-Temperatura-Micro/assets/22857096/43465302-76af-4bb6-822a-62aca399f0c6" width=50% height=50%>
+</p>
 
 ## Introducción
 
