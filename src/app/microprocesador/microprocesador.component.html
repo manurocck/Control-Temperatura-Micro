@@ -1,0 +1,22 @@
+ <!-- Paste image from assets/micro.png -->
+ <img src="assets/micro.png" alt="micro" class="ui small image centered">
+ <!-- <h1 class="ui header">
+   Microprocesador
+ </h1> -->
+<div class="ui small statistic" [ngClass]="(error>2)? 'orange': 'green' ">
+  <div class="value">
+    {{temperatura_micro | number: '1.0-0'}} °C
+  </div>
+  <div class="label">
+    Microprocesador
+  </div>
+</div>
+<div class="ui fluid green button" (click)="accion.emit('70')">
+  Setear T° a 70 °C
+</div>
+<div class="ui fluid orange button" (click)="accion.emit('lento')">
+  Aumentar T° lentamente
+</div>
+<div class="ui fluid red button" (click)="accion.emit('rapido')">
+  Aumentar T° rápidamente
+</div>

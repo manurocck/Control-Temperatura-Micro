@@ -1,0 +1,18 @@
+<img src="assets/ventilador.jpg" alt="ventilador" class="ui small image centered">
+<!-- <h1 class="ui header">
+    Ventilador
+</h1> -->
+<div class="ui green small statistic">
+  <div class="value">
+    {{velocidad_ventilador | number: '1.0-0'}}
+  </div>
+  <div class="label">
+    Velocidad ventilador
+  </div>
+</div>
+<div class="ui fluid container" *ngIf="velocidad_ventilador!=0">
+  <i class="double angle up   huge icon red" *ngIf="diferenciaVelocidades()>50"></i>
+  <i class="angle up          huge icon red" *ngIf="diferenciaVelocidades()<50 && diferenciaVelocidades()>0"></i>
+  <i class="angle down        huge icon green" *ngIf="diferenciaVelocidades()>-50 && diferenciaVelocidades()<0"></i>
+  <i class="double angle down huge icon green" *ngIf="diferenciaVelocidades()<-50"></i>
+</div>

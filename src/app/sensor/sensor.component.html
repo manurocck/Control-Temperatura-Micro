@@ -1,0 +1,24 @@
+<img src="assets/termometro.webp" alt="sensor" class="ui small image centered">
+<!-- <h1 class="ui header">
+    Sensor
+</h1> -->
+<div class="ui basic segment">
+    <div class="ui green small statistic">
+        <div class="value">
+            {{temperatura_deseada}} °C
+        </div>
+        <div class="label">
+            T° deseada
+        </div>
+    </div>
+</div>
+<div class="ui basic segment">
+    <div class="ui yellow small statistic">
+        <div class="value">
+            {{mediciones[0].temp | number: '1.0-2'}} °C
+        </div>
+        <div class="label">
+            T° medida
+        </div>
+    </div>
+</div>
