@@ -1,27 +1,18 @@
-# ControlMicroprocesador
+<p align="center">
+<img src="https://www.frba.utn.edu.ar/wp-content/uploads/2016/08/logo-utn.ba-horizontal-e1471367724904.jpg" width=50% height=50%>
+</p>
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.4.
+# 🔥 Simulación de un Sistema de Control de T° de un Microprocesador
 
-## Development server
+## Introducción
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- Este proyecto simula un sistema de control de temperatura que consta de un sensor de temperatura, un microprocesador y un ventilador. 
+- El sistema opera midiendo la temperatura del entorno a través del sensor, transmitiendo estos datos al microprocesador. El microprocesador calcula el error comparando la temperatura deseada con la temperatura medida. 
+- Cuando el error supera un umbral predefinido, se desencadena un control correctivo sobre la temperatura activando el ventilador regulando su velocidad según la velocidad - anterior y el error actual.
 
-## Code scaffolding
+## Configuración y Uso 💻 
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Tienen que descargarse `nodejs` y `npm` para poder visualizar el proyecto.
+Una vez que lo tienen instalado, ejecutar `npm install` para instalar dependencias
+Por último ejecutar `npm run start` para correr el servidor localmente y navegá a la URL `http://localhost:4200/`.
+La aplicación va a actualizarse automáticamente ante cualquier cambio.
