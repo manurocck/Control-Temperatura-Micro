@@ -8,6 +8,8 @@ import { SensorComponent } from './sensor/sensor.component';
 import { VentiladorComponent } from './ventilador/ventilador.component';
 import { XrayComponent } from './xray/xray.component';
 import { ConfiguracionComponent } from './configuracion/configuracion.component';
+import { NgChartsModule } from 'ng2-charts';
+import { ErrorChartComponent } from './error-chart/error-chart.component';
 
 @NgModule({
   declarations: [
@@ -16,11 +18,13 @@ import { ConfiguracionComponent } from './configuracion/configuracion.component'
     SensorComponent,
     VentiladorComponent,
     XrayComponent,
-    ConfiguracionComponent
+    ConfiguracionComponent,
+    ErrorChartComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

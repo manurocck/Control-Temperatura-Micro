@@ -2,7 +2,6 @@
   <div class="ui clearing inverted segment">
     <h1 class="ui centered header">Simulación de un sistema <br>de control de temperatura</h1>
   </div>
-  
   <div class="ui segment">
     <div class="ui three column grid container center aligned">
       <div class="column">
@@ -17,6 +16,9 @@
         <app-ventilador [velocidad_anterior]="velocidad_anterior" [velocidad_ventilador]="velocidad_ventilador"></app-ventilador>
       </div>
     </div>
+  </div>
+  <div class="ui segment">
+    <app-error-chart [lineChartData]="lineChartData"></app-error-chart>
   </div>
   <div class="ui segment">
     <app-xray [mediciones]="mediciones"></app-xray>

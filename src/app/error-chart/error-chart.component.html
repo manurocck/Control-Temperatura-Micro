@@ -1,0 +1,31 @@
+<div class="ui clearing basic segment">
+  <h2 class="ui left floated header">
+      <i class="thermometer half icon"></i>
+      <div class="content">
+          Gráfico de temperatura
+          <div class="sub header">Temperatura real <span style="color:pink">(rosa)</span> y medida por el sensor <span style="color:lightblue">(celeste)</span></div>
+      </div>
+  </h2>
+  <button class="ui right floated icon basic button right aligned" 
+          (click)="toggle_xray = !toggle_xray"
+          >
+      <i class="big eye icon" [ngClass]="(toggle_xray)? 'slash': '' "></i>
+  </button>
+  <div class="ui container" *ngIf="toggle_xray">
+    <canvas baseChart height="80vh"
+      [data]="lineChartData"
+      [labels]="lineChartData.labels"
+      [options]="lineChartOptions"
+      [type]="lineChartType"
+      >
+    </canvas>
+  </div>
+</div>
+<!-- 
+{{chart_data.temporizador.length}}
+{{chart_data.t_real.length}}
+{{chart_data.t_sensada.length}} -->
+
+<!-- [colors]="lineChartColors" -->
+<!-- [legend]="lineChartLegend" -->
+<!-- [plugins]="lineChartOptions.plugins" -->

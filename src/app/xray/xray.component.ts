@@ -13,7 +13,7 @@ export class XrayComponent {
   @Input() 
   mediciones: 
     {
-      temp: number, 
+      temp_sens: number, 
       time: number, 
       error : number,
       delta_error : number

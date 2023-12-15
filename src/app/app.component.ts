@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { sleep } from './utils/utils';
 import { ApiTemperaturaService } from './api-temperatura.service';
+import { ChartConfiguration } from 'chart.js';
 
 const MAX_MEDICIONES_GUARDADAS = 5;
 const MAX_VELOCIDAD_VENTILADOR  = 200;  // Velocidad máxima del ventilador
@@ -13,6 +14,7 @@ const TEMPERATURA_AMBIENTE      = 25;   // Temperatura ambiente (en °C)
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+
   constructor(private api_temp : ApiTemperaturaService){ }
   ngOnInit() {
     this.run(0);
@@ -41,12 +43,36 @@ export class AppComponent {
   promedio_errores_anterior : number = 0;
   velocidad_anterior        : number = 0;
   mediciones: 
-    {
-      temp: number, 
-      time: number, 
-      error : number,
-      delta_error : number
-    } [] = [];
+  {
+    temp_real: number, 
+    temp_sens: number, 
+    time: number, 
+    error : number,
+    delta_error : number
+  } [] = [];
+
+  chart_data : 
+  {
+    temporizador: number[], 
+    t_sensada: number[], 
+    t_real: number[]
+  } = { temporizador : [] , t_sensada : [] , t_real : [] };
+
+  lineChartData: ChartConfiguration['data'] = 
+  {
+    datasets:
+    [
+      { 
+        data: [], 
+        label: 'Temperatura medida'
+      },
+      { 
+        data: [], 
+        label: 'Temperatura real' 
+      }
+    ],
+    labels: []
+  };
 
   // Función principal de la simulación
   async run( contador : number ) {
@@ -81,17 +107,35 @@ export class AppComponent {
     this.temperatura_micro = temperatura_real;
     
     // Guardamos la medicion **al principio** 
-    let ERROR_PRECISION_SENSOR = (Math.random() - 0.5)*0.5; //Agregamos un error de +- 0.25 a la medicion
+    let ERROR_PRECISION_SENSOR = (Math.random() - 0.5)*1; //Agregamos un error de +- 0.25 a la medicion
     const error_anterior = this.mediciones[0] ? this.mediciones[0].error : 0;
 
     this.mediciones.unshift(
       {
-        temp : temperatura_real + ERROR_PRECISION_SENSOR, 
+        temp_real : temperatura_real, 
+        temp_sens : temperatura_real + ERROR_PRECISION_SENSOR, 
         time : this.timer/1000 , // tiempo en segundos
         error: temperatura_real - this.temperatura_deseada + ERROR_PRECISION_SENSOR,
         delta_error : error_anterior - (temperatura_real - this.temperatura_deseada + ERROR_PRECISION_SENSOR)
       }
     );
+
+    // Actualizamos el gráfico
+    this.chart_data.temporizador.push(this.timer/1000);
+    this.chart_data.t_sensada.push(this.mediciones[0].temp_sens);
+    this.chart_data.t_real.push(this.mediciones[0].temp_real);
+
+    this.lineChartData.datasets[0].data = this.chart_data.t_sensada;
+    this.lineChartData.datasets[1].data = this.chart_data.t_real;
+    this.lineChartData.labels = this.chart_data.temporizador.map( (x) => x.toString()+"s");
+
+    // Recortar dataset si es > 10
+    if(this.chart_data.temporizador.length > 10){
+      this.chart_data.temporizador.shift();
+      this.chart_data.t_sensada.shift();
+      this.chart_data.t_real.shift();
+    }
+    
 
     // Actualizamos la sumatoria de errores y temperaturas
     
@@ -101,11 +145,11 @@ export class AppComponent {
       let ultimaMedicion = this.mediciones.pop();
       if (ultimaMedicion){
         this.sumatoria_errores      -= ultimaMedicion.error;
-        this.sumatoria_temperaturas -= ultimaMedicion.temp;
+        this.sumatoria_temperaturas -= ultimaMedicion.temp_sens;
       }
     }
     this.sumatoria_errores      += this.mediciones[0].error;
-    this.sumatoria_temperaturas += this.mediciones[0].temp;
+    this.sumatoria_temperaturas += this.mediciones[0].temp_sens;
   }
 
   // Simulación del efecto de enfriamiento del ventilador sobre el micro
@@ -206,4 +250,5 @@ export class AppComponent {
     this.timer+=this.deltaTimer;
     await sleep(this.deltaTimer); // Si se elimina esta línea, la simulación se ejecuta lo más rápido posible
   }
+
 }

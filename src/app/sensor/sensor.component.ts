@@ -7,5 +7,5 @@ import { Component, Input } from '@angular/core';
 })
 export class SensorComponent {
   @Input() temperatura_deseada : number = 0;
-  @Input() mediciones: {temp: number, time: number}[] = [];
+  @Input() mediciones: {temp_sens: number, time: number}[] = [];
 }

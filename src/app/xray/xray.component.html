@@ -1,6 +1,6 @@
 <div class="ui clearing basic segment">
     <h2 class="ui left floated header">
-        <i class="thermometer half icon"></i>
+        <i class="table icon"></i>
         <div class="content">
             Últimas mediciones
             <div class="sub header">Temperaturas medidas por el sensor</div>
@@ -11,22 +11,22 @@
             >
         <i class="big eye icon" [ngClass]="(toggle_xray)? 'slash': '' "></i>
     </button>
+    <table class="ui celled table" *ngIf="toggle_xray">
+        <thead>
+            <tr>
+                <th>Tiempo</th>
+                <th>T° Medida</th>
+                <th>Error</th>
+                <th>Ajuste error</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let t of mediciones">
+                <td>{{t.time | number: '1.0-2' }} segs</td>
+                <td>{{t.temp_sens | number: '1.0-4'}} °C</td>
+                <td>{{(t.delta_error>0)? "+ ":"- "}}{{((t.error>0)?       t.error       : t.error*(-1)        | number: '1.0-4'  )}}</td>
+                <td>{{(t.delta_error>0)? "+ ":"- "}}{{((t.delta_error>0)? t.delta_error : t.delta_error*(-1)) | number: '1.0-4'}}</td>
+            </tr>
+        </tbody>
+    </table>
 </div>
-<table class="ui celled table" *ngIf="toggle_xray">
-    <thead>
-        <tr>
-            <th>Tiempo</th>
-            <th>T° Medida</th>
-            <th>Error</th>
-            <th>Ajuste error</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let t of mediciones">
-            <td>{{t.time | number: '1.0-2' }} segs</td>
-            <td>{{t.temp | number: '1.0-4'}} °C</td>
-            <td>{{(t.delta_error>0)? "+ ":"- "}}{{((t.error>0)?       t.error       : t.error*(-1)        | number: '1.0-4'  )}}</td>
-            <td>{{(t.delta_error>0)? "+ ":"- "}}{{((t.delta_error>0)? t.delta_error : t.delta_error*(-1)) | number: '1.0-4'}}</td>
-        </tr>
-    </tbody>
-</table>
