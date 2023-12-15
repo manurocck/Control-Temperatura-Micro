@@ -1,36 +1,24 @@
-<div class="ui segment center aligned">
-<h1 class="ui header">Simulación de un sistema <br>de control de temperatura</h1>
+<div class="ui segments">
+  <div class="ui clearing inverted segment">
+    <h1 class="ui centered header">Simulación de un sistema <br>de control de temperatura</h1>
+  </div>
   
-<div class="ui three column grid container center aligned">
-  <div class="column">
-    <app-sensor [temperatura_deseada]="temperatura_deseada" [mediciones]="mediciones"></app-sensor>
+  <div class="ui segment">
+    <div class="ui three column grid container center aligned">
+      <div class="column">
+        <app-sensor [temperatura_deseada]="temperatura_deseada" [mediciones]="mediciones"></app-sensor>
+      </div>
+      <div class="column">
+        <app-microprocesador [error]="mediciones[0].error" [temperatura_micro]="temperatura_micro"
+          (accion)="evento_micro($event)">
+        </app-microprocesador> 
+      </div>
+      <div class="column">
+        <app-ventilador [velocidad_anterior]="velocidad_anterior" [velocidad_ventilador]="velocidad_ventilador"></app-ventilador>
+      </div>
+    </div>
   </div>
-  <div class="column">
-   <app-microprocesador [error]="mediciones[0].error" [temperatura_micro]="temperatura_micro"
-    (accion)="evento_micro($event)">
-  </app-microprocesador> 
+  <div class="ui segment">
+    <app-xray [mediciones]="mediciones"></app-xray>
   </div>
-  <div class="column">
-    <app-ventilador [velocidad_anterior]="velocidad_anterior" [velocidad_ventilador]="velocidad_ventilador"></app-ventilador>
-  </div>
-</div>
-<div class="ui container">
-  <table class="ui celled table">
-      <thead>
-    <tr>
-      <th>Tiempo</th>
-      <th>T° Medida</th>
-      <th>Error</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let t of mediciones">
-      <td>{{t.time | number: '1.0-2' }} segs</td>
-      <td>{{t.temp}} °C</td>
-      <td>{{(t.error>0)? "+ "+t.error:"- "+(t.error*(-1))}}</td>
-    </tr>
-    </tbody>
-  </table>
-</div>
-
 </div>

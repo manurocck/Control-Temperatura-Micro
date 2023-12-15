@@ -6,13 +6,17 @@ import { AppComponent } from './app.component';
 import { MicroprocesadorComponent } from './microprocesador/microprocesador.component';
 import { SensorComponent } from './sensor/sensor.component';
 import { VentiladorComponent } from './ventilador/ventilador.component';
+import { XrayComponent } from './xray/xray.component';
+import { ConfiguracionComponent } from './configuracion/configuracion.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MicroprocesadorComponent,
     SensorComponent,
-    VentiladorComponent
+    VentiladorComponent,
+    XrayComponent,
+    ConfiguracionComponent
   ],
   imports: [
     BrowserModule,
